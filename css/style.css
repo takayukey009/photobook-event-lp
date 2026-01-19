@@ -676,6 +676,19 @@ body {
     color: var(--color-text-muted);
 }
 
+/* Cover Image */
+.about-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--transition-slow);
+}
+
+.about-image-wrapper:hover .about-cover-img {
+    transform: scale(1.05);
+}
+
 /* Decorative frame */
 .about-image-wrapper::after {
     content: '';
