@@ -1276,25 +1276,62 @@ body {
     }
 
     .nav-list {
-        display: none;
+        display: flex;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(26, 10, 16, 0.98);
+        background: linear-gradient(135deg, rgba(255, 240, 245, 0.98) 0%, rgba(255, 228, 236, 0.98) 100%);
+        backdrop-filter: blur(20px);
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: var(--space-2xl);
+        z-index: 1000;
+        /* Animation */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-20px);
+        transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
     }
 
     .nav-list.active {
         display: flex;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
     }
 
     .nav-link {
         font-size: var(--font-size-xl);
+        color: var(--color-text);
+        position: relative;
+        padding: var(--space-sm) var(--space-lg);
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: var(--color-primary);
+        transform: scale(1.05);
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 80%;
     }
 
     .menu-btn {
@@ -1302,8 +1339,14 @@ body {
         z-index: 1001;
     }
 
+    .menu-btn span {
+        background: var(--color-primary-dark);
+        transition: all 0.3s ease;
+    }
+
     .menu-btn.active span:nth-child(1) {
         transform: rotate(45deg) translate(6px, 6px);
+        background: var(--color-primary);
     }
 
     .menu-btn.active span:nth-child(2) {
@@ -1312,6 +1355,7 @@ body {
 
     .menu-btn.active span:nth-child(3) {
         transform: rotate(-45deg) translate(6px, -6px);
+        background: var(--color-primary);
     }
 
     .benefits-grid {
